@@ -11,6 +11,8 @@
     <h1>Band Buddy</h1>
 
     <h3>Band Buddy, the app that helps cover bands pick random songs from their massive list</h3>
+    
+    <!-- Add a Song Section -->
     <div>
         <h3>Add a Song</h3>
         <form method="POST" action="/">
@@ -20,14 +22,15 @@
         </form>
     </div>
 
+    <!-- Display All Songs -->
     <div>
         <h3>All Songs</h3>
         <ul>
             {% for song in songs %}
-                <li>{{ song.song }} by {{ song.artist }}
+                <li>{{ song[1] }} by {{ song[2] }} <!-- Update for database column indexing -->
                     {% if session.username == 'admin' %}
                     <!-- Show remove button for admins -->
-                    <form method="POST" action="/remove/{{ song.id }}" style="display:inline;">
+                    <form method="POST" action="/remove/{{ song[0] }}" style="display:inline;">
                         <button type="submit">Remove</button>
                     </form>
                     {% endif %}
@@ -38,10 +41,12 @@
         </ul>
     </div>
 
+    <!-- Random Song Selector -->
     <div>
         <a href="/random">Select a Random Song</a>
     </div>
 
+    <!-- Login/Logout -->
     <div>
         {% if session.username == 'admin' %}
             <a href="/logout">Logout</a>
