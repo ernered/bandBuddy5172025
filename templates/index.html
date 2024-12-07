@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Band Buddy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Band Buddy</h1>
+
+    <h3>Band Buddy, the app that helps cover bands pick random songs from their massive list</h3>
+    <div>
+        <h3>Add a Song</h3>
+        <form method="POST" action="/">
+            <input type="text" name="song_name" placeholder="Song Name" required>
+            <input type="text" name="artist_name" placeholder="Artist Name" required>
+            <button type="submit">Add Song</button>
+        </form>
+    </div>
+
+    <div>
+        <h3>All Songs</h3>
+        <ul>
+            {% for song in songs %}
+                <li>{{ song.song }} by {{ song.artist }}
+                    {% if session.username == 'admin' %}
+                    <!-- Show remove button for admins -->
+                    <form method="POST" action="/remove/{{ song.id }}" style="display:inline;">
+                        <button type="submit">Remove</button>
+                    </form>
+                    {% endif %}
+                </li>
+            {% else %}
+                <li>No songs available yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <a href="/random">Select a Random Song</a>
+    </div>
+
+    <div>
+        {% if session.username == 'admin' %}
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/login">Admin Login</a>
+        {% endif %}
+    </div>
+</body>
+</html>

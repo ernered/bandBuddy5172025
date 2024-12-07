@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Song - Band Buddy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Random Song</h1>
+
+    <div>
+        {% if selected_song %}
+        <p>Selected song: {{ selected_song.song }} by {{ selected_song.artist }}</p>
+        {% else %}
+        <p>No song selected.</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>
