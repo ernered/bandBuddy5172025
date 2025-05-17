@@ -1,7 +1,10 @@
 <!-- templates/random.html -->
 <!DOCTYPE html>
 <html>
-<head><title>Random Song</title></head>
+<head>
+    <title>Random Song</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
 <body>
   <h1>🎵 Your Random Song 🎵</h1>
   {% if selected_song %}
